@@ -29,8 +29,7 @@ namespace XF.iOS
             Xamarin.Calabash.Start();
             global::Xamarin.Forms.Forms.Init();
 			AppCenter.Start($"ios={Constants.GetInstance().AppCenterKey_iOS};", typeof(Analytics), typeof(Crashes));
-			var a = Constants.GetInstance();
-
+            
             LoadApplication(new App());
 
             return base.FinishedLaunching(uiApplication, launchOptions);

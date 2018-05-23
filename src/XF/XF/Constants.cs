@@ -3,10 +3,11 @@ using System.IO;
 using System.Reflection;
 using System.Xml.Linq;
 using Xamarin.Forms;
+using System.Configuration;
 
 namespace XF
 {
-    public class Constants
+	public class Constants
     {
 		private static Constants instance;
         public static Constants GetInstance()
@@ -17,20 +18,34 @@ namespace XF
 		}
 
         private Constants()
-        {
+        {         
 			// read config file
 			var assembly = typeof(App).GetTypeInfo().Assembly;
 			using (var stream = assembly.GetManifestResourceStream("XF.App.config"))
-            using (var reader = new StreamReader(stream))
             {
-                var xml = XDocument.Parse(reader.ReadToEnd());
-				ReadConfigFile(xml);
+				if(stream != null)
+				{
+					using (var reader = new StreamReader(stream))
+                    {
+                        var xml = XDocument.Parse(reader.ReadToEnd());
+                        ReadConfigFile(xml);
+                    }
+				}
+				else
+				{
+					ReadEnvironmentVariable();
+				}
             }
         }
 
         private void ReadConfigFile(XDocument xml)
 		{
 			AppCenterKey_iOS = xml.Element("config").Element("appcenter").Element("ios").Value;
+		}
+
+		private void ReadEnvironmentVariable()
+		{
+			AppCenterKey_iOS = Environment.GetEnvironmentVariable("APP_CENTER_KEY_IOS");
 		}
 
         // ■View Params

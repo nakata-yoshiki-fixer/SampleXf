@@ -24,6 +24,5 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icon\setting.png" />
-    <EmbeddedResource Include="App.config" />
   </ItemGroup>
 </Project>
