@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:XF.ViewModels;assembly:ViewModels"
+             xmlns:control="clr-namespace:XF.Controls;assembly:Controls"
+             x:Class="XF.Views.HomePage"
+             NavigationPage.HasNavigationBar="false">
+    <ContentPage.BindingContext>
+        <vm:HomePageViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <RelativeLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <control:Header Title="{Binding HeaderTitle}" RightIconSource="{Binding HeaderRightIconSource}"/>
+        </RelativeLayout>
+    </ContentPage.Content>
+</ContentPage>
