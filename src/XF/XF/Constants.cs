@@ -33,7 +33,7 @@ namespace XF
                     }
 			    }
 
-				ReadEnvironmentVariable
+				ReadEnvironmentVariable();
 			}
         }
 
