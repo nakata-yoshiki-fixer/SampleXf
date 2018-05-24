@@ -10,8 +10,16 @@
     </ContentPage.BindingContext>
     
     <ContentPage.Content>
-        <RelativeLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            <control:Header Title="{Binding HeaderTitle}" RightIconSource="{Binding HeaderRightIconSource}"/>
-        </RelativeLayout>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <control:Header Title="{Binding HeaderTitle}"
+                            RIconSource="{Binding HeaderRightIconSource}"
+                            OnRIconClick="{Binding HeaderRightCommand}"
+                            Grid.Row="0"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

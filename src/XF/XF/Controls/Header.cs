@@ -7,8 +7,8 @@ namespace XF.Controls
     {
 		private BoxView bar;
 		private Label title;
-		private TintImage rightIcon;
-		private TintImage leftIcon;
+		private TintImage rIcon;
+		private TintImage lIcon;
 
         public Header()
         {
@@ -34,7 +34,7 @@ namespace XF.Controls
                 FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
 			};
 
-			rightIcon = new TintImage
+			rIcon = new TintImage
 			{
 				VerticalOptions = LayoutOptions.FillAndExpand,
 				HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -43,7 +43,7 @@ namespace XF.Controls
                 TintColor = Constants.GetInstance().HeaderSubColor,
 			};
 
-			leftIcon = new TintImage
+			lIcon = new TintImage
             {
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -54,8 +54,8 @@ namespace XF.Controls
 
             // ■Binding
 			title.SetBinding(Label.TextProperty, "HeaderTitle");
-			rightIcon.SetBinding(Image.SourceProperty, "HeaderRightIconSource");
-			leftIcon.SetBinding(Image.SourceProperty, "HeaderLeftIconSource");
+			rIcon.SetBinding(Image.SourceProperty, "HeaderRightIconSource");
+			lIcon.SetBinding(Image.SourceProperty, "HeaderLeftIconSource");
 
             // ■Layout
 			Children.Add(bar,
@@ -70,34 +70,34 @@ namespace XF.Controls
 			             Constraint.RelativeToParent(parent => parent.Width - Constants.GetInstance().HeaderIconSize * 2),
 						 Constraint.Constant(30));
 			
-			Children.Add(rightIcon,
+			Children.Add(rIcon,
 						 Constraint.RelativeToParent(parent => parent.Width - Constants.GetInstance().HeaderIconSize - 10),
 						 Constraint.RelativeToParent(parent => parent.Height - Constants.GetInstance().HeaderIconSize - 10),
 						 Constraint.Constant(Constants.GetInstance().HeaderIconSize),
 						 Constraint.Constant(Constants.GetInstance().HeaderIconSize));
 
-            Children.Add(leftIcon,
+            Children.Add(lIcon,
 			             Constraint.RelativeToParent(parent => parent.X + 10),
 			             Constraint.RelativeToParent(parent => parent.Height - Constants.GetInstance().HeaderIconSize - 10),
 			             Constraint.Constant(Constants.GetInstance().HeaderIconSize),
                          Constraint.Constant(Constants.GetInstance().HeaderIconSize));
 
-			// Gesture
-			rightIcon.GestureRecognizers.Add(new TapGestureRecognizer
+			// ■Gesture
+			rIcon.GestureRecognizers.Add(new TapGestureRecognizer
 			{
 				Command = new Command((obj) =>
 				{
-					if (OnRightIconClick != null)
-						OnRightIconClick.Execute(obj);
+					if (OnRIconClick != null)
+						OnRIconClick.Execute(obj);
 				})
 			});
 
-			leftIcon.GestureRecognizers.Add(new TapGestureRecognizer
+			lIcon.GestureRecognizers.Add(new TapGestureRecognizer
 			{
 				Command = new Command((obj) => 
 				{
-					if (OnLeftIconClick != null)
-						OnLeftIconClick.Execute(obj);
+					if (OnLIconClick != null)
+						OnLIconClick.Execute(obj);
 				})
 			});
         }
@@ -110,43 +110,35 @@ namespace XF.Controls
 									null,
 									BindingMode.TwoWay);
 
-		public static readonly BindableProperty RightIconSourceProperty =
-			BindableProperty.Create(nameof(RightIconSource),
+		public static readonly BindableProperty RIconSourceProperty =
+			BindableProperty.Create(nameof(RIconSource),
 									typeof(ImageSource),
 									typeof(Header),
 									default(ImageSource),
 			                        BindingMode.TwoWay);
 
-		public static readonly BindableProperty LeftIconSourceProperty =
-			BindableProperty.Create(nameof(LeftIconSource),
+		public static readonly BindableProperty LIconSourceProperty =
+			BindableProperty.Create(nameof(LIconSource),
 									typeof(ImageSource),
 									typeof(Header),
 									default(ImageSource),
 									BindingMode.TwoWay);
 
-		public static readonly BindableProperty OnRightIconClickProperty =
-			BindableProperty.Create(nameof(OnRightIconClick),
-									typeof(Command),
+		public static readonly BindableProperty OnRIconClickProperty =
+			BindableProperty.Create(nameof(OnRIconClick),
+			                        typeof(Command),
 									typeof(Header),
-									default(Command),
+			                        default(Command),
 			                        BindingMode.TwoWay);
 
-		public static readonly BindableProperty OnLeftIconClickProperty =
-			BindableProperty.Create(nameof(OnLeftIconClick),
-                                    typeof(Command),
+		public static readonly BindableProperty OnLIconClickProperty =
+			BindableProperty.Create(nameof(OnLIconClick),
+			                        typeof(Command),
                                     typeof(Header),
-                                    default(Command),
+			                        default(Command),
                                     BindingMode.TwoWay);
 
         // ■BindableProperty Delegate
-		private static void RightIconSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
-		{
-			var header = bindable as Header;
-            if(header != null)
-			{
-				header.rightIcon.TintColor = Constants.GetInstance().HeaderSubColor;
-			}
-		}
               
         // ■Property
 		public string Title
@@ -155,28 +147,28 @@ namespace XF.Controls
 			set { SetValue(TitleProperty, value); }
 		}
 
-        public ImageSource RightIconSource
+		public ImageSource RIconSource
 		{
-			get { return (ImageSource)GetValue(RightIconSourceProperty); }
-            set { SetValue(RightIconSourceProperty, value); }
+			get { return (ImageSource)GetValue(RIconSourceProperty); }
+            set { SetValue(RIconSourceProperty, value); }
 		}
 
-		public ImageSource LeftIconSource
+		public ImageSource LIconSource
 		{
-			get { return (ImageSource)GetValue(LeftIconSourceProperty); }
-			set { SetValue(LeftIconSourceProperty, value); }
+			get { return (ImageSource)GetValue(LIconSourceProperty); }
+			set { SetValue(LIconSourceProperty, value); }
+		}
+        
+		public Command OnRIconClick
+		{
+			get { return (Command)GetValue(OnRIconClickProperty); }
+			set { SetValue(OnRIconClickProperty, value); }
 		}
 
-        public Command OnRightIconClick
-		{
-			get { return (Command)GetValue(OnRightIconClickProperty); }
-			set { SetValue(OnRightIconClickProperty, value); }
-		}
-
-		public Command OnLeftIconClick
+		public Command OnLIconClick
         {
-			get { return (Command)GetValue(OnLeftIconClickProperty); }
-			set { SetValue(OnLeftIconClickProperty, value); }
+			get { return (Command)GetValue(OnLIconClickProperty); }
+			set { SetValue(OnLIconClickProperty, value); }
         }
     }
 }

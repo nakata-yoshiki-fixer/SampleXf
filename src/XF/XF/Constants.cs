@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml.Linq;
 using Xamarin.Forms;
-using System.Configuration;
+using System.Xml.XPath;
 
 namespace XF
 {
@@ -18,34 +18,33 @@ namespace XF
 		}
 
         private Constants()
-        {         
+        {
 			// read config file
 			var assembly = typeof(App).GetTypeInfo().Assembly;
 			using (var stream = assembly.GetManifestResourceStream("XF.App.config"))
-            {
-				if(stream != null)
+			{
+				if (stream != null) 
 				{
 					using (var reader = new StreamReader(stream))
                     {
                         var xml = XDocument.Parse(reader.ReadToEnd());
                         ReadConfigFile(xml);
+
                     }
-				}
-				else
-				{
-					ReadEnvironmentVariable();
-				}
-            }
+			    }
+
+				ReadEnvironmentVariable
+			}
         }
 
         private void ReadConfigFile(XDocument xml)
 		{
-			AppCenterKey_iOS = xml.Element("config").Element("appcenter").Element("ios").Value;
+			AppCenterKey_iOS = xml.XPathSelectElement("config/appCenter/ios").Attribute("key").Value;
 		}
 
 		private void ReadEnvironmentVariable()
 		{
-			AppCenterKey_iOS = Environment.GetEnvironmentVariable("APP_CENTER_KEY_IOS");
+			AppCenterKey_iOS = Environment.GetEnvironmentVariable("APP_CENTER_KEY_IOS") ?? AppCenterKey_iOS;
 		}
 
         // ■View Params
@@ -58,7 +57,7 @@ namespace XF
         // Footer
 		public int FooterHeight { get; set; } = 60;
 		public int FooterIconSize { get; set; }
-		public Color FooterBaseColor { get; set; }
+		public Color FooterBaseColor { get; set; } = Color.FromHex("#F3F3F3");
 		public Color FooterSubColor { get; set; }
         
         // AppCenter

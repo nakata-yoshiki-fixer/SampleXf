@@ -29,7 +29,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NUnit" Version="2.6.4" />
-    <PackageReference Include="Xamarin.UITest" Version="2.2.2" />
+    <PackageReference Include="Xamarin.UITest">
+      <Version>2.2.4</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XF.iOS\XF.iOS.csproj">
