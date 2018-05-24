@@ -20,6 +20,7 @@
                             RIconSource="{Binding HeaderRightIconSource}"
                             OnRIconClick="{Binding HeaderRightCommand}"
                             Grid.Row="0"/>
+            <Label Text="Welcome to Xamarin.Forms!" Grid.Row="1"></Label>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

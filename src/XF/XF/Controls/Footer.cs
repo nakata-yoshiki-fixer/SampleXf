@@ -57,4 +57,9 @@ namespace XF.Controls
 		public string IconSource { get; set; }
 		public string Text { get; set; }
     }
+
+	public class FootreCell : StackLayout
+	{
+		
+	}
 }

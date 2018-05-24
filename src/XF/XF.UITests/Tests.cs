@@ -33,5 +33,14 @@ namespace XF.UITests
 
             Assert.IsTrue(results.Any());
         }
+
+		[Test]
+        public void WelcomeTextIsDisplayed2()
+        {
+            AppResult[] results = app.WaitForElement(c => c.Marked("Welcome to Xamarin.Forms!2"));
+            app.Screenshot("Welcome screen.");
+
+            Assert.IsTrue(results.Any());
+        }
     }
 }
