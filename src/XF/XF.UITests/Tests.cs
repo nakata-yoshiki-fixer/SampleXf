@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
+using UIKit;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 
@@ -19,28 +20,54 @@ namespace XF.UITests
             this.platform = platform;
         }
 
-        [SetUp]
+		[TestFixtureSetUp]
         public void BeforeEachTest()
         {
             app = AppInitializer.StartApp(platform);
         }
 
         [Test]
-        public void WelcomeTextIsDisplayed()
-        {
-            AppResult[] results = app.WaitForElement(c => c.Marked("Welcome to Xamarin.Forms!"));
-            app.Screenshot("Welcome screen.");
+        public void T00_Repl()
+		{
+			app.Repl();
+		}
 
-            Assert.IsTrue(results.Any());
-        }
+        // ■ボタン関連
+		// ボタンがあるかどうかのテスト(Textプロパティを拾う)
+        [Test]
+        public void T01_ButtonTest()
+		{
+			var result = app.WaitForElement("Alert").Any();
+			Assert.IsTrue(result);
+		}
 
-		[Test]
-        public void WelcomeTextIsDisplayed2()
-        {
-            AppResult[] results = app.WaitForElement(c => c.Marked("Welcome to Xamarin.Forms!2"));
-            app.Screenshot("Welcome screen.");
+		// ボタンがあるかどうかのテスト(AutomationIDを拾う)
+        [Test]
+        public void T02_ButtonTest()
+		{
+			var result = app.WaitForElement("HomePage.AlertButton").Any();
+			Assert.IsTrue(result);
+		}
 
-            Assert.IsTrue(results.Any());
-        }
+        // DisplayAlertが表示されるかどうかのテスト
+        [Test]
+        public void T03_ButtonTest()
+		{
+			app.Tap("HomePage.AlertButton");
+			var result = app.WaitForElement("Button Clicked").Any();
+			result &= app.WaitForElement("SampleDialog").Any();
+			result &= app.WaitForElement("OK").Any();
+			Assert.IsTrue(result);
+		}
+
+        // DisplayAlertのOK押下後にラベルの表示値が正しいかどうかのテスト
+        [Test]
+        public void T04_ButtonTest()
+		{
+			app.WaitForNoElement("DisplayAlert OK");
+			app.Tap(c => c.Text("OK"));
+			var result = app.WaitForElement("DisplayAlert OK").Any();
+			Assert.IsTrue(result);
+		}
     }
 }

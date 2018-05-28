@@ -6,21 +6,36 @@
              x:Class="XF.Views.HomePage"
              NavigationPage.HasNavigationBar="false">
     <ContentPage.BindingContext>
-        <vm:HomePageViewModel/>
+        <vm:HomePageViewModel />
     </ContentPage.BindingContext>
-    
     <ContentPage.Content>
         <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto">
+                </RowDefinition>
+                <RowDefinition Height="*">
+                </RowDefinition>
+                <RowDefinition Height="Auto">
+                </RowDefinition>
             </Grid.RowDefinitions>
-            <control:Header Title="{Binding HeaderTitle}"
-                            RIconSource="{Binding HeaderRightIconSource}"
-                            OnRIconClick="{Binding HeaderRightCommand}"
-                            Grid.Row="0"/>
-            <Label Text="Welcome to Xamarin.Forms!" Grid.Row="1"></Label>
+            <control:Header Title="{Binding HeaderTitle}" RIconSource="{Binding HeaderRightIconSource}" OnRIconClick="{Binding HeaderRightCommand}" Grid.Row="0" />
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Grid.Row="1" Margin="5">
+                <Button AutomationId="HomePage.AlertButton"
+                        Text="Alert"
+                        BorderRadius="5"
+                        TextColor="White" 
+                        BackgroundColor="Green"
+                        FontAttributes="Bold"
+                        WidthRequest="80"
+                        HorizontalOptions="Center"
+                        Command="{Binding AlertCommand}"></Button>
+                <Label AutomationId="HomePage.SampleLabel"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       Text="{Binding SampleText, Mode=TwoWay}"></Label>
+            </StackLayout>
+            <control:Footer ItemSource="{Binding FooterItems}" Grid.Row="2">
+            </control:Footer>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

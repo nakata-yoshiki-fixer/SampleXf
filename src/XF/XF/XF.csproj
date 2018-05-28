@@ -16,28 +16,17 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Resources\" />
     <Folder Include="Resources\Icon\" />
+    <Folder Include="Logics\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Icon\Setting.png" />
     <None Remove="Resources\Icon\setting.png" />
-    <None Remove="app.config" />
     <None Remove="App.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icon\setting.png" />
-    <EmbeddedResource Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="ViewModels\IHeaderViewModel.cs" />
-    <Compile Remove="Commands\DelegateCommand.cs" />
+    <Compile Remove="Helpers\DelegateCommand.cs" />
   </ItemGroup>
-  <ProjectExtensions>
-    <MonoDevelop>
-      <Properties>
-        <Policies>
-          <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileName" />
-        </Policies>
-      </Properties>
-    </MonoDevelop>
-  </ProjectExtensions>
 </Project>
