@@ -2,44 +2,32 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key></key>
-	<string></string>
 	<key>PreferenceSpecifiers</key>
 	<array>
-		<dict>
-			<key>DefaultValue</key>
-			<string>default</string>
-			<key>KeyboardType</key>
-			<string>NumberPad</string>
-			<key>Key</key>
-			<string>sample</string>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Sample</string>
-		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Touch ID</string>
-			<key>FooterText</key>
-			<string>認可・ログインに利用</string>
+			<string>TOUCH ID</string>
 		</dict>
 		<dict>
-			<key>DefaultValue</key>
-			<true/>
-			<key>Key</key>
-			<string>touch_id</string>
 			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Touch IDを使用</string>
+			<string>PSSliderSpecifier</string>
+			<key>MaximumValue</key>
+			<integer>1</integer>
+			<key>MaximumValueImage</key>
+			<string></string>
+			<key>MinimumValue</key>
+			<integer>0</integer>
+			<key>MinimumValueImage</key>
+			<string></string>
+			<key>Key</key>
+			<string>slider_preference</string>
+			<key>DefaultValue</key>
+			<real>0.5</real>
 		</dict>
 	</array>
 	<key>StringsTable</key>
 	<string>Root</string>
-	<key>Title</key>
-	<string></string>
 </dict>
 </plist>

@@ -8,7 +8,6 @@ using UIKit;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using LocalAuthentication;
 
 namespace XF.iOS
 {
@@ -30,42 +29,10 @@ namespace XF.iOS
             Xamarin.Calabash.Start();
             global::Xamarin.Forms.Forms.Init();
 			AppCenter.Start($"ios={Constants.GetInstance().AppCenterKey_iOS};", typeof(Analytics), typeof(Crashes));
-            
-            LoadApplication(new App());
 
+            LoadApplication(new App());
 
             return base.FinishedLaunching(uiApplication, launchOptions);
         }
-
-        public void Auth()
-		{
-			var userDefaults = new NSUserDefaults();
-			// 書き込みサンプル
-			//userDefaults.SetBool(false, "touch_id");
-
-			if(userDefaults.BoolForKey("touch_id"))
-			{
-				var context = new LAContext();
-                NSError AuthError;
-                var myReason = new NSString("To add a new chore");
-
-                if (context.CanEvaluatePolicy(LAPolicy.DeviceOwnerAuthentication, out AuthError))
-                {
-                    var replyHandler = new LAContextReplyHandler((success, error) => {
-                        this.InvokeOnMainThread(async () => {
-                            if (success)
-                            {
-                                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Success", "", "OK");
-                            }
-                            else
-                            {
-                                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Error", "", "OK");
-                            }
-                        });
-                    });
-                    context.EvaluatePolicy(LAPolicy.DeviceOwnerAuthentication, myReason, replyHandler);
-                };
-			}         
-		}
     }
 }
