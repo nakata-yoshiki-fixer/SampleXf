@@ -19,7 +19,7 @@
                 </RowDefinition>
             </Grid.RowDefinitions>
             <control:Header Title="{Binding HeaderTitle}" RIconSource="{Binding HeaderRightIconSource}" OnRIconClick="{Binding HeaderRightCommand}" Grid.Row="0" />
-            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" Grid.Row="1" Margin="5">
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Grid.Row="1" Margin="5">
                 <Button AutomationId="HomePage.AlertButton"
                         Text="Alert"
                         BorderRadius="5"
@@ -27,12 +27,20 @@
                         BackgroundColor="Green"
                         FontAttributes="Bold"
                         WidthRequest="80"
-                        HorizontalOptions="Center"
+                        HorizontalOptions="CenterAndExpand"
                         Command="{Binding AlertCommand}"></Button>
                 <Label AutomationId="HomePage.SampleLabel"
                        HorizontalTextAlignment="Center"
-                       HorizontalOptions="Center"
+                       HorizontalOptions="CenterAndExpand"
                        Text="{Binding SampleText, Mode=TwoWay}"></Label>
+                <control:PanBoxView StartX="{Binding BoxViewStartX}"
+                                    StartY="{Binding BoxViewStartY}"
+                                    EndX="{Binding BoxViewEndX}"
+                                    EndY="{Binding BoxViewEndY}"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand"
+                                    BackgroundColor="Navy"></control:PanBoxView>
+                <Label Text="{Binding PanPoint}" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"></Label>
             </StackLayout>
             <control:Footer ItemSource="{Binding FooterItems}" Grid.Row="2">
             </control:Footer>
