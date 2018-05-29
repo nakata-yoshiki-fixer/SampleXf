@@ -145,7 +145,7 @@ namespace XF.ViewModels
             {
                 boxViewEndY = value;
                 OnPropertyChanged("BoxViewEndY");
-				PointUpdate();
+				PointUpdate()
             }
         }
 
