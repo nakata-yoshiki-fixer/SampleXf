@@ -4,7 +4,7 @@ using Xamarin.UITest;
 
 namespace XF.UITests
 {
-	[TestFixture(Platform.Android)]
+	//[TestFixture(Platform.Android)]
     [TestFixture(Platform.iOS)]
     public class Tests
     {
@@ -16,7 +16,7 @@ namespace XF.UITests
             this.platform = platform;
         }
 
-		[TestFixtureSetUp]
+		[SetUp]
         public void BeforeEachTest()
         {
             app = AppInitializer.StartApp(platform);

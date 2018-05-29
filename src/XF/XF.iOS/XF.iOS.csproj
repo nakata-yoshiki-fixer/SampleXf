@@ -98,6 +98,7 @@
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\TintImageRenderer.cs" />
+    <Compile Include="DependencyServices\LocalAuthenticator.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -151,13 +152,17 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.446417" />
-    <PackageReference Include="Xamarin.TestCloud.Agent" Version="0.21.4" />
     <PackageReference Include="Microsoft.AppCenter.Crashes">
       <Version>1.6.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AppCenter.Analytics">
       <Version>1.6.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>3.0.0.482510</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.TestCloud.Agent">
+      <Version>0.21.5</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -170,10 +175,12 @@
   <ItemGroup>
     <Folder Include="Renderers\" />
     <Folder Include="Resources\Icon\" />
+    <Folder Include="DependencyServices\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon\setting.png" />
     <BundleResource Include="Settings.bundle\Root.plist" />
     <BundleResource Include="Resources\Icon\calender.png" />
+    <BundleResource Include="Resources\Icon\fingerprint.png" />
   </ItemGroup>
 </Project>

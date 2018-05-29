@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using XF.Controls;
 using XF.Logics;
+using XF.Interfaces;
 
 namespace XF.ViewModels
 {
@@ -33,11 +34,19 @@ namespace XF.ViewModels
 			{
 				new FooterItemViewModel
 				{
-					IconSource = "Icon/calender.png",
-					Text = "カレンダー",
-					OnItemSelect = new Command(async() =>
+					IconSource = "Icon/fingerprint.png",
+					Text = "認証",
+					OnItemSelect = new Command(() =>
 					{
-						await DisplayDialogLogic.Alert("FooterClick", "Item1", "OK");
+						var localAuthenticator = DependencyService.Get<ILocalAuthenticator>();
+						if(localAuthenticator.CheckDevice())
+						{
+							Device.BeginInvokeOnMainThread(async() =>
+							{
+								var result = await localAuthenticator.AuthAsync();
+								await DisplayDialogLogic.Alert("Authentication Result", result.ToString(), "OK");
+							});
+						}
 					}),
 				},
 			};
@@ -53,6 +62,8 @@ namespace XF.ViewModels
 
 			// ■SampleLabel
 			SampleText = "default";
+
+			PanPoint = "(0.0, 0.0) => (0.0, 0.0)";
 		}
 
 		// Header
@@ -87,6 +98,77 @@ namespace XF.ViewModels
 				sampleText = value;
 				OnPropertyChanged("SampleText");
 			}
+		}
+
+		// PanBoxView
+		private double boxViewStartX;
+        public double BoxViewStartX
+		{
+			get { return boxViewStartX; }
+			set
+			{
+				boxViewStartX = value;
+				OnPropertyChanged("BoxViewStartX");
+				PointUpdate();
+			}
+		}
+
+		private double boxViewStartY;
+        public double BoxViewStartY
+        {
+            get { return boxViewStartY; }
+            set
+            {
+                boxViewStartY = value;
+                OnPropertyChanged("BoxViewStartY");
+				PointUpdate();
+            }
+        }
+
+		private double boxViewEndX;
+        public double BoxViewEndX
+		{
+			get { return boxViewEndX; }
+			set
+			{
+				boxViewEndX = value;
+				OnPropertyChanged("BoxViewEndX");
+				PointUpdate();
+			}
+		}
+
+		private double boxViewEndY;
+        public double BoxViewEndY
+        {
+            get { return boxViewEndY; }
+            set
+            {
+                boxViewEndY = value;
+                OnPropertyChanged("BoxViewEndY");
+				PointUpdate()
+            }
+        }
+
+		private string panPoint;
+        public string PanPoint
+		{
+			get { return panPoint; }
+			set
+			{
+				panPoint = value;
+				OnPropertyChanged("PanPoint");
+			}
+		}
+
+        public void PointUpdate()
+		{
+			PanPoint = string.Format("({0:0.00}, {1:0.00}) => ({2:0.00}, {3:0.00})", new string[]
+			{
+				BoxViewStartX.ToString(),
+				BoxViewStartY.ToString(),
+				BoxViewEndX.ToString(),
+				BoxViewEndY.ToString(),
+			});
 		}
 	}
 }

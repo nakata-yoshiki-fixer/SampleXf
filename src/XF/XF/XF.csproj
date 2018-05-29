@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.446417" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.6.1" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.6.1" />
+    <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
@@ -17,6 +17,7 @@
     <Folder Include="Resources\" />
     <Folder Include="Resources\Icon\" />
     <Folder Include="Logics\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Icon\Setting.png" />
